@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react'
+import Form from "./components/form"
+import People from "./components/people"
+import NewestPerson from "./components/newestPerson"
 
-function App() {
+const App = () => {
+  const [people, setPeople] = useState([
+    {
+      firstName: "Jon",
+      lastName: "Doe"
+    },
+    {
+      firstName: "Anita",
+      lastName: "Momma"
+    }
+  ]);
+  const addPerson = (person) => {
+    setPeople([...people, person])
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="Container">
+        <div className="row">
+          <Form addPerson = {addPerson} />
+          <People people = {people} />
+          <NewestPerson newestPerson = {people[people.length -1]} />        
+        </div>
     </div>
   );
 }
